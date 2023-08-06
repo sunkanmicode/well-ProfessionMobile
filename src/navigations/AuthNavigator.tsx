@@ -3,12 +3,16 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/authScreens/LoginScreen";
 import RegisterScreen from "../screens/authScreens/RegisterScreen";
 import OnboardingScreen from "../screens/authScreens/OnboardingScreen";
+import ForgotPasswordScreen from "../screens/authScreens/ForgotPasswordScreen";
+import ResetPasswordScreen from "../screens/authScreens/ResetPaswwordScreen";
 
 
 type AuthStackParamList = {
   "Onboarding": undefined;
   "Login": undefined;
   "Register": undefined;
+  "ForgotPassword": undefined;
+  "ResetPassword":undefined;
 };
 const AuthStack = createNativeStackNavigator<AuthStackParamList>();
 
@@ -19,6 +23,14 @@ const AuthNavigator = ()=>{
         <AuthStack.Screen name="Onboarding" component={OnboardingScreen} />
         <AuthStack.Screen name="Login" component={LoginScreen} />
         <AuthStack.Screen name="Register" component={RegisterScreen} />
+        <AuthStack.Screen
+          name="ForgotPassword"
+          component={ForgotPasswordScreen}
+        />
+        <AuthStack.Screen
+          name="ResetPassword"
+          component={ResetPasswordScreen}
+        />
       </AuthStack.Navigator>
     );
 
