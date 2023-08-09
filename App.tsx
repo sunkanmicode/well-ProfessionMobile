@@ -5,8 +5,11 @@ import { useFonts } from "expo-font";
 
 export default function App() {
    const [fontsLoaded] = useFonts({
-     "Plus-SemiBold": require("./src/assets/fonts/PlusJakartaSans-SemiBold.ttf"),
-     "Plus-regular": require("./src/assets/fonts/PlusJakartaSans-Regular.ttf"),
+     PlusSemiBold: require("./src/assets/fonts/PlusJakartaSans-SemiBold.ttf"),
+     Plusregular: require("./src/assets/fonts/PlusJakartaSans-Regular.ttf"),
+     PlusExtraBold: require("./src/assets/fonts/PlusJakartaSans-ExtraBold.ttf"),
+     PlusMedium: require("./src/assets/fonts/PlusJakartaSans-Medium.ttf"),
+     PlusBold: require("./src/assets/fonts/PlusJakartaSans-Bold.ttf"),
    });
 
    if (!fontsLoaded) {

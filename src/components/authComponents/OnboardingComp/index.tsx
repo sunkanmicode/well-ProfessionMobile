@@ -6,25 +6,24 @@ import {
   FlatList,
   Dimensions,
   TouchableOpacity,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
 } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import { TypeSlider } from "../../../types/authTypes";
 
 const { width, height } = Dimensions.get("window");
 
-type TypeSlider = {
-  id: string;
-  img: string;
-  title: string;
-  text: string;
-};
-
-const OnboardinComp = ({ slider, navigation }) => {
-  // const navigation = useNavigation();
+const OnboardinComp: React.FC<{ slider: TypeSlider[] }> = ({ slider }) => {
+  const navigation = useNavigation();
   const [currentSlideIndex, setCurrentSlideIndex] = React.useState(0);
 
   const ref = React.useRef<number | any>(null);
 
-  const updateCurrentSlideIndex = (e) => {
+  const updateCurrentSlideIndex = (
+    e: NativeSyntheticEvent<NativeScrollEvent>
+  ) => {
     const contentOffsetX = e.nativeEvent.contentOffset.x;
     const currentIndex = Math.round(contentOffsetX / width);
     setCurrentSlideIndex(currentIndex);
@@ -62,7 +61,9 @@ const OnboardinComp = ({ slider, navigation }) => {
                 navigation.navigate("Register");
               }}
             >
-              <Text className="text-white font-thin">Get Started</Text>
+              <Text className="text-white font-[PlusMedium] font-thin">
+                Get Started
+              </Text>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
@@ -71,7 +72,9 @@ const OnboardinComp = ({ slider, navigation }) => {
                 onSkip();
               }}
             >
-              <Text className="text-orange-20 font-thin">Skip</Text>
+              <Text className="text-orange-20 font-[PlusMedium] font-thin">
+                Skip
+              </Text>
             </TouchableOpacity>
           )}
         </View>
@@ -113,11 +116,11 @@ const OnboardinComp = ({ slider, navigation }) => {
                     resizeMode="contain"
                     style={{ height: 350, width }}
                   />
-                  <Text className=" w-96 text-white text-5xl font-black px-5">
+                  <Text className=" w-96 text-white text-5xl  font-[PlusExtraBold] px-5">
                     {item.title}
                   </Text>
                   <View>
-                    <Text className="w-96 p-3 text-xs text-white font-thin">
+                    <Text className="w-96 p-3 text-xs text-zinc-500 font-[Plusregular]">
                       {item.text}
                     </Text>
                   </View>
