@@ -1,22 +1,21 @@
-import React from 'react'
-import RegisterComp from '../../../components/authComponents/RegisterComp'
-import { useNavigation } from "@react-navigation/native";
+import React from "react";
+import RegisterComp from "../../../components/authComponents/RegisterComp";
+
 
 const RegisterScreen = () => {
-    const navigation = useNavigation();
-   const [form, setForm] = React.useState<object>({});
+  const [form, setForm] = React.useState<{[key: string]: any}>({});
 
-   const onchangeText = (name: string, value: string) => {
-     setForm({ ...form, [name]: value });
-   };
- 
+  const onchangeText = (name: string, value: string) => {
+    setForm({ ...form, [name]: value });
+  };
+
+  const onSubmit = ()=>{
+    console.log(form, "form")
+  }
+
   return (
-    <RegisterComp
-      onchangeText={onchangeText}
-      form={form}
-      navigation={navigation}
-    />
+    <RegisterComp onchangeText={onchangeText} onSubmit={onSubmit} form={form} />
   );
-}
+};
 
-export default RegisterScreen
+export default RegisterScreen;

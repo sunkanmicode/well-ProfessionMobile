@@ -11,6 +11,7 @@ type InputType = {
   iconPostion?: string;
   placeholder?: string;
   error?: string;
+  secureTextEntry?: boolean;
 };
 
 const CustomInput = ({
@@ -19,6 +20,7 @@ const CustomInput = ({
   value,
   style,
   label,
+  secureTextEntry,
   iconPostion,
   placeholder,
   error,
@@ -53,16 +55,21 @@ const CustomInput = ({
 
   return (
     <View className="py-3">
-      {label && <Text className="text-[#2C3131] text-base">{label}</Text>}
+      {label && (
+        <Text className="text-[#2C3131] text-sm  font-[Plusregular]">
+          {label}
+        </Text>
+      )}
       <View
         className={`px-2 h-14 border border-gray-300 rounded-md items-center mt-2 ${getFlexDirection()} ${getBorderColor()}`}
       >
         <View>{icon && icon}</View>
         <TextInput
+          secureTextEntry={secureTextEntry}
           value={value}
           onChangeText={onChangeText}
           placeholder={placeholder}
-          className="flex-1 h-11 px-2"
+          className="flex-1 h-11 px-2 font-[Plusregular]"
           // style={style}
           onFocus={() => {
             setFocused(true);
@@ -72,7 +79,11 @@ const CustomInput = ({
           }}
         />
       </View>
-      {error && <Text className="text-red-700 text-xs pt-2">{error}</Text>}
+      {error && (
+        <Text className="text-red-700 text-xs pt-2 font-[Plusregular]">
+          {error}
+        </Text>
+      )}
     </View>
   );
 };

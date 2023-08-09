@@ -5,7 +5,7 @@ import AuthNavigator from './AuthNavigator';
 import HomeNavigator from './HomeNavigator';
 
 const AppNavigation = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(true)
   return (
     <NavigationContainer>
       {isLoggedIn ? <HomeNavigator /> : <AuthNavigator />}

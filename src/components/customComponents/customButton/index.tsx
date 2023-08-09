@@ -3,8 +3,8 @@ import { View, Text, TextInput, TouchableOpacity, ActivityIndicator } from "reac
 
 type ButtonType = {
   title: string;
-  disabled: boolean;
-  loading: boolean;
+  disabled?: boolean;
+  loading?: boolean;
   primary?: boolean;
   onPress?:()=> void
 };
@@ -32,7 +32,11 @@ const CustomButton = ({
     >
       <View className="flex-row">
         {loading && <ActivityIndicator />}
-        {title && <Text className={`${disabledTextBtn}`}>{title}</Text>}
+        {title && (
+          <Text className={`${disabledTextBtn} font-[PlusMedium]`}>
+            {title}
+          </Text>
+        )}
       </View>
     </TouchableOpacity>
   );

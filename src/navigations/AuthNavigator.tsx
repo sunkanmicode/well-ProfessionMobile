@@ -5,15 +5,10 @@ import RegisterScreen from "../screens/authScreens/RegisterScreen";
 import OnboardingScreen from "../screens/authScreens/OnboardingScreen";
 import ForgotPasswordScreen from "../screens/authScreens/ForgotPasswordScreen";
 import ResetPasswordScreen from "../screens/authScreens/ResetPaswwordScreen";
+import { AuthStackParamList } from "../types/navigations";
 
 
-type AuthStackParamList = {
-  "Onboarding": undefined;
-  "Login": undefined;
-  "Register": undefined;
-  "ForgotPassword": undefined;
-  "ResetPassword":undefined;
-};
+
 const AuthStack = createNativeStackNavigator<AuthStackParamList>();
 
 const AuthNavigator = ()=>{
