@@ -10,6 +10,7 @@ export default function App() {
      PlusExtraBold: require("./src/assets/fonts/PlusJakartaSans-ExtraBold.ttf"),
      PlusMedium: require("./src/assets/fonts/PlusJakartaSans-Medium.ttf"),
      PlusBold: require("./src/assets/fonts/PlusJakartaSans-Bold.ttf"),
+     InterRegular: require("./src/assets/fonts/Inter-Regular.ttf"),
    });
 
    if (!fontsLoaded) {

@@ -1,13 +1,19 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from '../screens/mainScreens/HomeScreen';
 import TopRatedScreen from '../screens/mainScreens/TopRatedScreen';
 import { CartIcon, FeaturedIcon, HomeIcon, ProfileIcon, SearchIcon } from '../helper/Icon';
+import HomeStackNavigators from './rootStackNavigators/HomeStackNavigators';
+import { HomeStackParamList } from '../types/navigations';
+
+
+const HomeStack = ()=>{
+
+}
 
 
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<HomeStackParamList>();
 
 function DummyScreen() {
   return <View className='flex-1 items-center justify-center bg-green-500'>
@@ -54,18 +60,17 @@ const HomeNavigator = () => {
           // tabBarInactiveTintColor: "gray",
           tabBarActiveBackgroundColor: "rgba(175, 94, 65, 0.2)",
           // tabBarLabelPosition: "beside-icon",
-          
         })}
       >
+        
         <Tab.Screen
           name="Home"
-          component={HomeScreen}
+          component={HomeStackNavigators}
           options={{
             tabBarIcon: ({ color, size, focused }) => (
               <HomeIcon size={size} color={color} />
               // tabBarShowLabel: false,
             ),
-            
           }}
         />
         <Tab.Screen

@@ -80,8 +80,8 @@ const HomeScreenComp = ({
         <View className="py-10">
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {trendingCourseData.map((item) => (
-              <View className=" flex-row" key={item.id}>
-                <View className="w-24 mr-5">
+              <View className=" flex-row">
+                <View key={item.id} className="w-24 mr-5">
                   <View className="bg-red-700 w-24 h-32 rounded-xl">
                     <Image
                       source={item.img}
@@ -92,7 +92,7 @@ const HomeScreenComp = ({
                       }}
                     />
                   </View>
-                  <Text className="text-xs text-center font-[Plusregular] mt-2">
+                  <Text className="text-[10px] text-center font-[Plusregular] mt-2">
                     {item.title}
                   </Text>
                 </View>
@@ -102,7 +102,11 @@ const HomeScreenComp = ({
         </View>
         <View className="flex-row items-center justify-between">
           <Text className=" text-lg font-[PlusBold]">Top rated Courses</Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("TopRatedScreen");
+            }}
+          >
             <Text className="text-xs text-[#AF5E41] font-[PlusSemiBold]">
               View all
             </Text>
@@ -112,17 +116,19 @@ const HomeScreenComp = ({
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {ratedCourseData.map((item) => (
               <View className="flex-row">
-                <View className="w-48 h-52 mr-5" key={item.id}>
-                  <View className="h-24 bg-yellow-500">
+                <View className="w-48 h-52 mr-5 " key={item.id}>
+                  <View className="h-24">
                     <Image
                       source={item.img}
                       style={{
                         width: "100%",
                         height: "100%",
+                        borderTopLeftRadius: 5,
+                        borderTopRightRadius: 5,
                       }}
                     />
-                    <View className="flex-row items-center pt-3 pl-3 ">
-                      <Text className="font-[PlusSemiBold] text-sm text-[#CD760F] mr-4">
+                    <View className="flex-row items-center pt-3">
+                      <Text className="font-[PlusSemiBold] text-[12px] text-[#CD760F] mr-4">
                         Lorem ipsum{" "}
                       </Text>
                       <Ionicons
@@ -131,14 +137,33 @@ const HomeScreenComp = ({
                         color="black"
                       />
                     </View>
-                    <View className="w-40 pl-3">
-                      <Text className="font-[PlusBold]">{item.title}</Text>
+                    <View className="w-40">
+                      <Text className="font-[PlusBold] text-[10px]">
+                        {item.title}
+                      </Text>
                     </View>
                   </View>
                 </View>
               </View>
             ))}
           </ScrollView>
+          <View>
+            <Text className="text-[17px] font-[PlusMedium]">
+              What course are you looking for?
+            </Text>
+            <View className="flex-row pt-3">
+              <TouchableOpacity className="h-[34px] w-[134px] bg-[#1F1F1F] items-center justify-center mr-3 rounded-full">
+                <Text className="text-xs font-[InterRegular] text-white">
+                  Lorem ipsum
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity className="h-[34px] w-[134px] bg-[#1F1F1F] items-center justify-center mr-5 rounded-full">
+                <Text className="text-xs font-[InterRegular] text-white">
+                  Lorem ipsum
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
       </View>
     </>

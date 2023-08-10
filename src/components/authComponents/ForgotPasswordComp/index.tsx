@@ -31,10 +31,10 @@ const ForgotPasswordComp = () => {
           className="w-16 h-16 m-auto"
         />
         <View className="m-auto">
-          <Text className="text-xl font-bold m-auto font-[PlusBold]">
+          <Text className="text-[22px] font-bold m-auto font-[PlusBold]">
             Forgot your password?
           </Text>
-          <Text className="text-[#6C7072] text-center font-[Plusregular]">
+          <Text className="text-[#6C7072] text-[12px] text-center font-[Plusregular]">
             Enter your registered email below to receive a password reset
             instruction.
           </Text>
