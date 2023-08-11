@@ -71,7 +71,9 @@ const HomeScreenComp = ({
       <View className="py-10 px-6">
         <View className="flex-row items-center justify-between">
           <Text className=" text-lg font-[PlusBold]">Now Trending Courses</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>{
+            navigation.navigate("TrendingScreen")
+          }}>
             <Text className="text-xs text-[#AF5E41] font-[PlusSemiBold]">
               View all
             </Text>
