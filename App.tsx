@@ -2,6 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import AppNavigation from './src/navigations';
 import { useFonts } from "expo-font";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 export default function App() {
    const [fontsLoaded] = useFonts({
@@ -17,11 +20,12 @@ export default function App() {
      return null;
    }
   return (
-   
-    <>
-      <AppNavigation />
-      <StatusBar style="auto" />
-    </>
+    <QueryClientProvider client={queryClient}>
+      
+        <AppNavigation />
+        <StatusBar style="auto" />
+      
+    </QueryClientProvider>
   );
 }
 

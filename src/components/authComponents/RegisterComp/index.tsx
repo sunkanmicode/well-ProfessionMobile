@@ -13,7 +13,15 @@ import { GoogleIcon } from "../../../helper/Icon";
 
 
 
-const RegisterComp = ({ onchangeText,onSubmit, form }: RegisterType) => {
+const RegisterComp = ({
+  onchangeText,
+  onSubmit,
+  form,
+  setForm,
+  isLoading,
+  isSecureEntry,
+  setIsSecureEntry,
+}: RegisterType) => {
   const navigation = useNavigation();
 
   return (
@@ -53,15 +61,24 @@ const RegisterComp = ({ onchangeText,onSubmit, form }: RegisterType) => {
         <CustomInput
           label="Phone number"
           placeholder={"Input your Phone number"}
+          keyboardType={"numeric"}
           icon={
             <CountryPicker
               //  countryCode
               withFilter
               withFlag
+              countryCode={form.cCountryCode || "AF"}
               withCountryNameButton={false}
+              withCallingCodeButton
               withCallingCode
               withEmoji
-              onSelect={() => {}}
+              onSelect={(v) => {
+                const cCallingCode = v.callingCode[0];
+                const cCountryCode = v.cca2;
+                setForm({ ...form, country_Code: cCallingCode, cCountryCode });
+
+                console.log(v, "v");
+              }}
             />
           }
           onChangeText={(value) => {
@@ -72,12 +89,26 @@ const RegisterComp = ({ onchangeText,onSubmit, form }: RegisterType) => {
         <CustomInput
           label="Create password"
           // value={value2}
-          secureTextEntry={true}
+          secureTextEntry={isSecureEntry}
           onChangeText={(value) => {
             onchangeText("password", value);
           }}
           placeholder={"Create your password"}
-          icon={<FontAwesome5 name="eye" size={24} color="black" />}
+          icon={
+            <TouchableOpacity
+              onPress={() => {
+                setIsSecureEntry((prev) => !prev);
+              }}
+            >
+              {/* <FontAwesome5 name="eye" size={24} color="black" /> */}
+
+              {isSecureEntry ? (
+                <FontAwesome5 name="eye-slash" size={24} color="black" />
+              ) : (
+                <FontAwesome5 name="eye" size={24} color="black" />
+              )}
+            </TouchableOpacity>
+          }
           iconPostion="right"
           // style={styles.input}
         />
@@ -117,16 +148,23 @@ const RegisterComp = ({ onchangeText,onSubmit, form }: RegisterType) => {
         <CustomButton
           primary
           title="Register"
-          loading={false}
-          disabled={false}
+          loading={isLoading}
+          disabled={isLoading}
           onPress={() => {
-            // onSubmit();
-            navigation.navigate("Login");
-            // toast.success({message:"Toast... am working"})
-            // toast.info({ message: "Toast... am working" });
-            // toast.danger({ message: "Toast... am working" });
+            onSubmit();
           }}
         />
+        <Text className="text-center font-[Plusregular] ">
+          Have an Account? {" "}
+          <Text
+            className="text-[#CD760F]"
+            onPress={() => {
+              navigation.navigate("Login");
+            }}
+          >
+            Login{" "}
+          </Text>
+        </Text>
       </ScrollView>
     </View>
   );

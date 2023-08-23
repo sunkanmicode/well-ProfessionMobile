@@ -31,10 +31,9 @@ const CustomButton = ({
       onPress={onPress}
     >
       <View className="flex-row">
-        {loading && <ActivityIndicator />}
         {title && (
           <Text className={`${disabledTextBtn} font-[PlusMedium]`}>
-            {title}
+            {loading ? <ActivityIndicator />: title}
           </Text>
         )}
       </View>

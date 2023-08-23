@@ -12,6 +12,7 @@ type InputType = {
   placeholder?: string;
   error?: string;
   secureTextEntry?: boolean;
+  keyboardType?: string
 };
 
 const CustomInput = ({
@@ -24,10 +25,9 @@ const CustomInput = ({
   iconPostion,
   placeholder,
   error,
+  keyboardType,
 }: InputType) => {
   const [focused, setFocused] = React.useState<boolean>(false);
-
-   
 
   const fontFamily = "font-Plus-regular";
 
@@ -69,6 +69,7 @@ const CustomInput = ({
           value={value}
           onChangeText={onChangeText}
           placeholder={placeholder}
+          keyboardType={keyboardType}
           className="flex-1 h-11 px-2 font-[Plusregular]"
           // style={style}
           onFocus={() => {

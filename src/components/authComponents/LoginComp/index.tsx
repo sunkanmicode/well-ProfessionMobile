@@ -11,12 +11,15 @@ import { GoogleIcon } from '../../../helper/Icon';
 type LoginType = {
   onchangeText: (name: string, value: string) => void;
   form: object;
-  isChecked: boolean
-  setChecked: (value: boolean) =>void
+  isChecked: boolean;
+  setChecked: (value: boolean) => void;
+  isSecureEntry: boolean;
+  setIsSecureEntry: () => void;
+  onSubmit:()=>void
 };
 
-const LoginComp = ({ onchangeText,isChecked, setChecked, form }: LoginType) => {
-      const navigation = useNavigation();
+const LoginComp = ({ onchangeText,isChecked, setChecked,onSubmit, isSecureEntry, setIsSecureEntry, form }: LoginType) => {
+      
   
 
   return (
@@ -110,7 +113,13 @@ const LoginComp = ({ onchangeText,isChecked, setChecked, form }: LoginType) => {
           </View>
         </View>
 
-        <CustomButton primary title="Login" loading={false} disabled={false} />
+        <CustomButton
+          primary
+          title="Login"
+          loading={false}
+          disabled={false}
+          onPress={onSubmit}
+        />
       </View>
     </View>
   );
