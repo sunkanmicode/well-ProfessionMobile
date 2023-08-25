@@ -13,7 +13,6 @@
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
-    "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "expo": "~49.0.5",
     "expo-checkbox": "~2.4.0",
@@ -29,9 +28,8 @@
     "react-native-screens": "~3.22.0",
     "react-native-svg": "13.9.0",
     "react-native-swiper-flatlist": "^3.2.3",
+    "react-native-toast-message": "^2.1.6",
     "react-query": "^3.39.3",
-    "react-redux": "^8.1.2",
-    "redux": "^4.2.1",
     "zustand": "^4.4.1"
   },
   "devDependencies": {

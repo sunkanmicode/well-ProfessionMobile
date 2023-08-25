@@ -21,11 +21,16 @@ export const registerUser = async (form) => {
 export const loginUser = async (users)=>{
     const res = await axiosInstance.post("/user/login", users);
          AsyncStorage.setItem("token", res.data.token);
-        //  AsyncStorage.setItem("user", JSON.stringify(res.data));
+         AsyncStorage.setItem("user", JSON.stringify(res.data));
          return res.data
     
-    
 }
+
+//GET ME USER
+export const getMeUser = async () => {
+  const res = await axiosInstance.get("/user/me");
+  return res.data;
+};
 
 //GET USERS
 export const getUsers = async () => {

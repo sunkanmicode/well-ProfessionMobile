@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { SearchIcon } from "../../../helper/Icon";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
+import useAuthStore from "../../../stores";
 
 const { width } = Dimensions.get("window");
 
@@ -20,15 +21,31 @@ const HomeScreenComp = ({
   homeSwiper,
   trendingCourseData,
   ratedCourseData,
+  isLoading,
+  error,
+  data,
 }) => {
   const navigation = useNavigation();
+
   return (
     <>
       <View className="py-10 px-6  bg-[#1E1D2F]">
         <View className="flex-row mt-5 justify-between">
-          <Text className="text-lg text-white font-[PlusSemiBold]">
-            Hello Devid
-          </Text>
+          {isLoading && (
+            <Text className="text-lg text-white font-[PlusSemiBold]">
+              Loading...
+            </Text>
+          )}
+          {error && (
+            <Text className="text-lg text-white font-[PlusSemiBold]">
+              {error}
+            </Text>
+          )}
+          {!isLoading && !error && (
+            <Text className="text-lg text-white font-[PlusSemiBold]">
+              Hello {data?.others.name}
+            </Text>
+          )}
 
           <TouchableOpacity className="" onPress={() => {}}>
             <Ionicons name="notifications-outline" size={24} color="#ffff" />
@@ -71,9 +88,11 @@ const HomeScreenComp = ({
       <View className="py-10 px-6">
         <View className="flex-row items-center justify-between">
           <Text className=" text-lg font-[PlusBold]">Now Trending Courses</Text>
-          <TouchableOpacity onPress={()=>{
-            navigation.navigate("TrendingScreen")
-          }}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("TrendingScreen");
+            }}
+          >
             <Text className="text-xs text-[#AF5E41] font-[PlusSemiBold]">
               View all
             </Text>

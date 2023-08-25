@@ -1,27 +1,21 @@
-import { View, Text, TextInput, StyleSheet } from "react-native";
 import React from "react";
+import {  ScrollView } from "react-native";
 import LoginComp from "../../../components/authComponents/LoginComp";
 import { useNavigation } from "@react-navigation/native";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-} from "react-query";
+import { useMutation } from "react-query";
+import Toast from "react-native-toast-message";
 import { loginUser } from "../../../helper/api";
-import toast from "../../../helper/toast";
 import useAuthStore from "../../../stores";
 
 const LoginScreen = () => {
   const navigation = useNavigation();
-  const { setRequestIsLogged, setAuthUser } = useAuthStore(
+  const { setRequestIsLogged, setAuthUser, authUser } = useAuthStore(
     (state) => state
   );
-   const [isSecureEntry, setIsSecureEntry] = React.useState(false);
+  const [isSecureEntry, setIsSecureEntry] = React.useState(true);
   const [form, setForm] = React.useState<{ [key: string]: string }>({});
   const [isChecked, setChecked] = React.useState<boolean>(false);
 
-console.log(authUser, "authUser");
   const onchangeText = (name: string, value: string) => {
     setForm({ ...form, [name]: value });
   };
@@ -31,18 +25,21 @@ console.log(authUser, "authUser");
     ["login"],
     {
       mutationFn: loginUser,
-    
       onSuccess: (data) => {
+        Toast.show({
+          type: "success",
+          text1: data.data.name,
+          text2: data.message,
+        });
         setRequestIsLogged(true);
-        // toast.success({ message: data.message });
-        // navigation.navigate("Login");
-        setAuthUser(data)
-        console.log(data, "data-onSccess");
+        setAuthUser(data);
       },
       onError: (error) => {
         console.log(error);
-        toast.danger({
-          message: error.response.data.message || error.response.data.msg,
+        Toast.show({
+          type: "error",
+          text1: "Oop!",
+          text2: error.response.data.message || error.response.data.msg,
         });
       },
     }
@@ -50,20 +47,28 @@ console.log(authUser, "authUser");
   console.log({ data, error, isError, isLoading, isSuccess }, "mutate");
 
   const onSubmit = () => {
-    console.log(form)
+    console.log(form);
     mutate(form);
+    // Toast.show({
+    //   type: "success",
+    //   text1: "Hello",
+    //   text2: "This is some something 👋",
+    // });
   };
 
   return (
-    <LoginComp
-      isChecked={isChecked}
-      setChecked={setChecked}
-      onchangeText={onchangeText}
-      form={form}
-      onSubmit={onSubmit}
-      isSecureEntry={isSecureEntry} 
-      setIsSecureEntry={setIsSecureEntry}
-    />
+    <ScrollView>
+      <LoginComp
+        isChecked={isChecked}
+        setChecked={setChecked}
+        onchangeText={onchangeText}
+        form={form}
+        onSubmit={onSubmit}
+        isSecureEntry={isSecureEntry}
+        isLoading={isLoading}
+        setIsSecureEntry={setIsSecureEntry}
+      />
+    </ScrollView>
   );
 };
 

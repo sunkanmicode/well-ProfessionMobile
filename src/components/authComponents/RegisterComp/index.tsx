@@ -1,4 +1,4 @@
-import { View, Text,ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import React from "react";
 import CustomInput from "../../customComponents/CustomInput";
 import CustomButton from "../../customComponents/customButton";
@@ -10,8 +10,6 @@ import ToastCustom from "../../customComponents/ToastCustom";
 import toast from "../../../helper/toast";
 import { RegisterType } from "../../../types/authTypes";
 import { GoogleIcon } from "../../../helper/Icon";
-
-
 
 const RegisterComp = ({
   onchangeText,
@@ -39,7 +37,7 @@ const RegisterComp = ({
         <View />
       </View>
       <ToastCustom />
-      <ScrollView className="py-5">
+      <ScrollView className="py-5" showsVerticalScrollIndicator={false}>
         <CustomInput
           label="Name"
           // value={value}
@@ -155,7 +153,7 @@ const RegisterComp = ({
           }}
         />
         <Text className="text-center font-[Plusregular] ">
-          Have an Account? {" "}
+          Have an Account?{" "}
           <Text
             className="text-[#CD760F]"
             onPress={() => {

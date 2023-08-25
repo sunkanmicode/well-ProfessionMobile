@@ -9,7 +9,9 @@ export type AuthStackParamList = {
 export type HomeStackParamList ={
   HomeScreen: undefined;
   TopRatedScreen: undefined;
-  TrendingScreen:undefined
+  TrendingScreen:undefined;
+  ProfileScreen:undefined;
+  ViewProfileScreen: undefined;
 
 }
 

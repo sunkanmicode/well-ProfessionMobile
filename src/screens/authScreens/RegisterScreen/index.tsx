@@ -8,12 +8,12 @@ import {
   QueryClient,
 } from "react-query";
 import { useNavigation } from "@react-navigation/native";
-import toast from "../../../helper/toast";
+import Toast from "react-native-toast-message";
 
 const RegisterScreen = () => {
   const navigation = useNavigation();
   const queryClient = useQueryClient();
-  const [isSecureEntry,setIsSecureEntry] = React.useState(false)
+  const [isSecureEntry,setIsSecureEntry] = React.useState(true)
   const [form, setForm] = React.useState<{ [key: string]: any }>({});
 
   const onchangeText = (name: string, value: string) => {
@@ -24,18 +24,23 @@ const RegisterScreen = () => {
   const { mutate,data, error, isError, isLoading } = useMutation({
     mutationFn: registerUser,
     onSuccess: (data) => {
-       toast.success({ message: data.message });
+         Toast.show({
+           type: "success",
+           text1: data.data.name,
+           text2: data.message,
+         });
        navigation.navigate("Login");
-      // console.log(data, "data-onSccess");
     },
     onError: (error) => {
       console.log(error)
-       toast.danger({
-         message: error.response.data.message || error.response.data.msg,
+       Toast.show({
+         type: "error",
+         text1: "Oop!",
+         text2: error.response.data.message || error.response.data.msg,
        });
     },
   });
-       console.log({ data, error, isError, isLoading }, "mutate");
+      //  console.log({ data, error, isError, isLoading }, "mutateRegister");
 
 
   const onSubmit = () => {

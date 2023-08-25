@@ -5,7 +5,7 @@ import TopRatedScreen from '../screens/mainScreens/TopRatedScreen';
 import { CartIcon, FeaturedIcon, HomeIcon, ProfileIcon, SearchIcon } from '../helper/Icon';
 import HomeStackNavigators from './rootStackNavigators/HomeStackNavigators';
 import { HomeStackParamList } from '../types/navigations';
-import ProfileScreen from '../screens/mainScreens/ProfileScreen';
+import ProfileStackNavigators from './rootStackNavigators/ProfileStackNavigators';
 
 
 const HomeStack = ()=>{}
@@ -97,8 +97,9 @@ const HomeNavigator = () => {
         />
         <Tab.Screen
           name="User"
-          component={ProfileScreen}
+          component={ProfileStackNavigators}
           options={{
+            tabBarStyle: { display: "none" },
             tabBarIcon: ({ color, size }) => (
               <ProfileIcon size={size} color={color} />
             ),
