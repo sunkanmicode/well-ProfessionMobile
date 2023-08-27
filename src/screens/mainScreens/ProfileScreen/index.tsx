@@ -1,7 +1,7 @@
-import { View, Text, ScrollView, Alert } from 'react-native'
-import React from 'react'
-import { useNavigation } from '@react-navigation/native';
-import ProfileScreenComp from '../../../components/mainComponents/ProfileScreenComp';
+import { View, Text, ScrollView, Alert } from "react-native";
+import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import ProfileScreenComp from "../../../components/mainComponents/ProfileScreenComp";
 import { MaterialIcons } from "@expo/vector-icons";
 import {
   CertificateIcon,
@@ -18,9 +18,11 @@ import {
   TermsAndConditionsIcon,
   WatchHistoryIcon,
 } from "../../../helper/Icon";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useQuery } from 'react-query';
-import { getMeUser } from '../../../helper/api';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useQuery } from "react-query";
+import { getMeUser } from "../../../helper/api";
+import useAuthStore from "../../../stores";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 export type generalTypeData = {
   icon: React.JSX.Element;
@@ -31,8 +33,12 @@ export type generalTypeData = {
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
+  const { setRequestIsLogged, requestLoggedIn, setAuthUser, authUser } =
+    useAuthStore((state) => state);
+
+  console.log(requestLoggedIn, authUser, "authUser");
   //CALL USEQUERY
-  const { isLoading,isError, error, data } = useQuery(["getme"], getMeUser);
+  const { isLoading, isError, error, data } = useQuery(["getme"], getMeUser);
 
   //LOG OUT LOGIC
   const handleLogout = () => {
@@ -45,8 +51,15 @@ const ProfileScreen = () => {
       {
         text: "Ok",
         onPress: async () => {
+            Toast.show({
+              type: "success",
+              text1: authUser.others.name,
+              text2: "You've logging out"
+            });
           await AsyncStorage.removeItem("token");
           await AsyncStorage.removeItem("user");
+          setRequestIsLogged(false)
+          setAuthUser(null)
 
           console.log("removed");
         },
@@ -148,7 +161,7 @@ const ProfileScreen = () => {
       ),
     },
     {
-      icon: <PrivacyAndPolicyIcon width={35} />,
+      icon: <PrivacyAndPolicyIcon width={35} color="red" />,
       name: "Privacy & Policy",
       onPress: () => {},
       arrorIcon: (
@@ -172,12 +185,12 @@ const ProfileScreen = () => {
         more={more}
         handleLogout={handleLogout}
         isLoading={isLoading}
-        isError={isError} 
-        error={error} 
+        isError={isError}
+        error={error}
         data={data}
       />
     </ScrollView>
   );
-}
+};
 
-export default ProfileScreen
+export default ProfileScreen;

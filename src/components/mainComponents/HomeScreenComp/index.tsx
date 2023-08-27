@@ -38,7 +38,8 @@ const HomeScreenComp = ({
           )}
           {error && (
             <Text className="text-lg text-white font-[PlusSemiBold]">
-              {error}
+              {/* {error} */}
+
             </Text>
           )}
           {!isLoading && !error && (
@@ -74,7 +75,7 @@ const HomeScreenComp = ({
           data={homeSwiper}
           renderItem={({ item }) => (
             <View>
-              <ImageBackground source={item.img} style={{ width, height: 250 }}>
+              <ImageBackground source={item.img} key={item.title} style={{ width, height: 250 }}>
                 <View className="h-18 w-64 my-20 mx-5">
                   <Text className="text-sm  text-white font-[PlusBold] leading-6">
                     {item.title}
@@ -102,7 +103,10 @@ const HomeScreenComp = ({
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {trendingCourseData.map((item) => (
               <View className=" flex-row">
-                <View key={item.id} className="w-24 mr-5">
+                <TouchableOpacity key={item.id} className="w-24 mr-5" onPress={()=>{
+                  console.log("click", item.id)
+                  navigation.navigate("CoursePreviewScreen", {item})
+                }}>
                   <View className="bg-red-700 w-24 h-32 rounded-xl">
                     <Image
                       source={item.img}
@@ -116,7 +120,7 @@ const HomeScreenComp = ({
                   <Text className="text-[10px] text-center font-[Plusregular] mt-2">
                     {item.title}
                   </Text>
-                </View>
+                </TouchableOpacity>
               </View>
             ))}
           </ScrollView>

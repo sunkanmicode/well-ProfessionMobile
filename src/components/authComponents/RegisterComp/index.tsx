@@ -6,8 +6,6 @@ import CountryPicker from "react-native-country-picker-modal";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import ToastCustom from "../../customComponents/ToastCustom";
-import toast from "../../../helper/toast";
 import { RegisterType } from "../../../types/authTypes";
 import { GoogleIcon } from "../../../helper/Icon";
 
@@ -36,7 +34,7 @@ const RegisterComp = ({
         <Text className="text-lg font-[PlusSemiBold]">Sign up</Text>
         <View />
       </View>
-      <ToastCustom />
+     
       <ScrollView className="py-5" showsVerticalScrollIndicator={false}>
         <CustomInput
           label="Name"
@@ -152,7 +150,7 @@ const RegisterComp = ({
             onSubmit();
           }}
         />
-        <Text className="text-center font-[Plusregular] ">
+        <Text className="text-center font-[Plusregular] pb-10">
           Have an Account?{" "}
           <Text
             className="text-[#CD760F]"

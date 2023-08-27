@@ -12,7 +12,6 @@ import Toast from "react-native-toast-message";
 
 const RegisterScreen = () => {
   const navigation = useNavigation();
-  const queryClient = useQueryClient();
   const [isSecureEntry,setIsSecureEntry] = React.useState(true)
   const [form, setForm] = React.useState<{ [key: string]: any }>({});
 
@@ -21,7 +20,7 @@ const RegisterScreen = () => {
   };
 
   //MUTATION HANDLER
-  const { mutate,data, error, isError, isLoading } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: registerUser,
     onSuccess: (data) => {
          Toast.show({

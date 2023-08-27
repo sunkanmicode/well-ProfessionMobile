@@ -11,11 +11,24 @@ import AuthNavigator from "./AuthNavigator";
 import HomeNavigator from "./HomeNavigator";
 import useAuthStore from "../stores";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getMeUser } from "../helper/api";
 
 const AppNavigation = () => {
-  const { requestLoggedIn, authUser } = useAuthStore((state) => state);
+  const { setRequestIsLogged,requestLoggedIn, setAuthUser, authUser } = useAuthStore(
+    (state) => state
+  );
+
+  const { isLoading, isError, error, data } = useQuery(["getme"], getMeUser,{
+    onSuccess(data) {
+         setRequestIsLogged(true);
+         setAuthUser(data);
+    },
+  });
   const [isAuthenticated, setIsAuthenticated] = useState(requestLoggedIn);
   const [authLoad, setAuthLoad] = useState(false);
+
+  // console.log(requestLoggedIn,authUser, "authUser")
+  // console.log(isLoading, isError, error, data, "555555555555")
 
   const getUser = async () => {
     try {

@@ -8,6 +8,8 @@ const HomeScreen = () => {
   //CALL USEQUERY
   const { isLoading, error, data } = useQuery(["getme"], getMeUser);
 
+  console.log(data, "data");
+
   const homeSwiper = [
     {
       id: "1",

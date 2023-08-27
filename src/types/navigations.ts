@@ -12,6 +12,7 @@ export type HomeStackParamList ={
   TrendingScreen:undefined;
   ProfileScreen:undefined;
   ViewProfileScreen: undefined;
+  CoursePreviewScreen: {item: object};
 
 }
 

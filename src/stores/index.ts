@@ -11,7 +11,7 @@ import { persist } from "zustand/middleware";
 // };
 
 const useAuthStore = create(
-  persist(
+ 
     (set) => ({
       authUser: null,
       requestLoggedIn: false,
@@ -19,8 +19,7 @@ const useAuthStore = create(
       setRequestIsLogged: (isLoggedIn) =>
         set((state) => ({ ...state, requestLoggedIn: isLoggedIn })),
     }),
-    { name: "auth" }
-  )
+   
 );
 
 export default useAuthStore;
