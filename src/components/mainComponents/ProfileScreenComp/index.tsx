@@ -46,9 +46,16 @@ const ProfileScreenComp = ({
             }}
           />
         </View>
-        <Text className="font-[PlusSemiBold] mt-2 text-[18px] leading-6">
-          {data.others.name}
-        </Text>
+        {isLoading && (
+          <Text className="font-[PlusSemiBold] mt-2 text-[18px] leading-6">
+            Loading...
+          </Text>
+        )}
+        {!isLoading && !isError && (
+          <Text className="font-[PlusSemiBold] mt-2 text-[18px] leading-6">
+            {data?.others.name}
+          </Text>
+        )}
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("ViewProfileScreen");

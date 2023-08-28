@@ -13,8 +13,12 @@ export default function App() {
      Plusregular: require("./src/assets/fonts/PlusJakartaSans-Regular.ttf"),
      PlusExtraBold: require("./src/assets/fonts/PlusJakartaSans-ExtraBold.ttf"),
      PlusMedium: require("./src/assets/fonts/PlusJakartaSans-Medium.ttf"),
+     PlusLight: require("./src/assets/fonts/PlusJakartaSans-Light.ttf"),
      PlusBold: require("./src/assets/fonts/PlusJakartaSans-Bold.ttf"),
      InterRegular: require("./src/assets/fonts/Inter-Regular.ttf"),
+     InterBold: require("./src/assets/fonts/Inter-Bold.ttf"),
+     InterMedium: require("./src/assets/fonts/Inter-Medium.ttf"),
+     InterBlack: require("./src/assets/fonts/Inter-Black.ttf"),
    });
 
    if (!fontsLoaded) {
