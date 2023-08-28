@@ -5,14 +5,10 @@ import TopRatedScreen from '../screens/mainScreens/TopRatedScreen';
 import { CartIcon, FeaturedIcon, HomeIcon, ProfileIcon, SearchIcon } from '../helper/Icon';
 import HomeStackNavigators from './rootStackNavigators/HomeStackNavigators';
 import { HomeStackParamList } from '../types/navigations';
+import ProfileStackNavigators from './rootStackNavigators/ProfileStackNavigators';
 
 
-const HomeStack = ()=>{
-
-}
-
-
-
+const HomeStack = ()=>{}
 const Tab = createBottomTabNavigator<HomeStackParamList>();
 
 function DummyScreen() {
@@ -62,7 +58,6 @@ const HomeNavigator = () => {
           // tabBarLabelPosition: "beside-icon",
         })}
       >
-        
         <Tab.Screen
           name="Home"
           component={HomeStackNavigators}
@@ -102,8 +97,9 @@ const HomeNavigator = () => {
         />
         <Tab.Screen
           name="User"
-          component={DummyScreen}
+          component={ProfileStackNavigators}
           options={{
+            tabBarStyle: { display: "none" },
             tabBarIcon: ({ color, size }) => (
               <ProfileIcon size={size} color={color} />
             ),

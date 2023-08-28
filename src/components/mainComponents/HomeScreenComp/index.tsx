@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { SearchIcon } from "../../../helper/Icon";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
+import useAuthStore from "../../../stores";
 
 const { width } = Dimensions.get("window");
 
@@ -20,15 +21,32 @@ const HomeScreenComp = ({
   homeSwiper,
   trendingCourseData,
   ratedCourseData,
+  isLoading,
+  error,
+  data,
 }) => {
   const navigation = useNavigation();
+
   return (
     <>
       <View className="py-10 px-6  bg-[#1E1D2F]">
         <View className="flex-row mt-5 justify-between">
-          <Text className="text-lg text-white font-[PlusSemiBold]">
-            Hello Devid
-          </Text>
+          {isLoading && (
+            <Text className="text-lg text-white font-[PlusSemiBold]">
+              Loading...
+            </Text>
+          )}
+          {error && (
+            <Text className="text-lg text-white font-[PlusSemiBold]">
+              {/* {error} */}
+
+            </Text>
+          )}
+          {!isLoading && !error && (
+            <Text className="text-lg text-white font-[PlusSemiBold]">
+              Hello {data?.others.name}
+            </Text>
+          )}
 
           <TouchableOpacity className="" onPress={() => {}}>
             <Ionicons name="notifications-outline" size={24} color="#ffff" />
@@ -57,7 +75,7 @@ const HomeScreenComp = ({
           data={homeSwiper}
           renderItem={({ item }) => (
             <View>
-              <ImageBackground source={item.img} style={{ width, height: 250 }}>
+              <ImageBackground source={item.img} key={item.title} style={{ width, height: 250 }}>
                 <View className="h-18 w-64 my-20 mx-5">
                   <Text className="text-sm  text-white font-[PlusBold] leading-6">
                     {item.title}
@@ -71,9 +89,11 @@ const HomeScreenComp = ({
       <View className="py-10 px-6">
         <View className="flex-row items-center justify-between">
           <Text className=" text-lg font-[PlusBold]">Now Trending Courses</Text>
-          <TouchableOpacity onPress={()=>{
-            navigation.navigate("TrendingScreen")
-          }}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("TrendingScreen");
+            }}
+          >
             <Text className="text-xs text-[#AF5E41] font-[PlusSemiBold]">
               View all
             </Text>
@@ -83,7 +103,10 @@ const HomeScreenComp = ({
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {trendingCourseData.map((item) => (
               <View className=" flex-row">
-                <View key={item.id} className="w-24 mr-5">
+                <TouchableOpacity key={item.id} className="w-24 mr-5" onPress={()=>{
+                  console.log("click", item.id)
+                  navigation.navigate("CoursePreviewScreen", {item})
+                }}>
                   <View className="bg-red-700 w-24 h-32 rounded-xl">
                     <Image
                       source={item.img}
@@ -97,7 +120,7 @@ const HomeScreenComp = ({
                   <Text className="text-[10px] text-center font-[Plusregular] mt-2">
                     {item.title}
                   </Text>
-                </View>
+                </TouchableOpacity>
               </View>
             ))}
           </ScrollView>

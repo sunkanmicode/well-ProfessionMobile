@@ -11,14 +11,24 @@ import { GoogleIcon } from '../../../helper/Icon';
 type LoginType = {
   onchangeText: (name: string, value: string) => void;
   form: object;
-  isChecked: boolean
-  setChecked: (value: boolean) =>void
+  isChecked: boolean;
+  setChecked: (value: boolean) => void;
+  isSecureEntry: boolean;
+  setIsSecureEntry: () => void;
+  onSubmit:()=>void
 };
 
-const LoginComp = ({ onchangeText,isChecked, setChecked, form }: LoginType) => {
-      const navigation = useNavigation();
-  
-
+const LoginComp = ({
+  onchangeText,
+  isChecked,
+  setChecked,
+  onSubmit,
+  isSecureEntry,
+  setIsSecureEntry,
+  form,
+  isLoading,
+}: LoginType) => {
+   const navigation = useNavigation();
   return (
     <View className="py-10 px-6 my-5">
       <View className="flex-row justify-between">
@@ -54,12 +64,26 @@ const LoginComp = ({ onchangeText,isChecked, setChecked, form }: LoginType) => {
         <CustomInput
           label="Create password"
           // value={value2}
-          secureTextEntry={true}
+          secureTextEntry={isSecureEntry}
           onChangeText={(value) => {
             onchangeText("password", value);
           }}
           placeholder={"Create your password"}
-          icon={<FontAwesome5 name="eye" size={18} color="black" />}
+          icon={
+            <TouchableOpacity
+              onPress={() => {
+                setIsSecureEntry((prev) => !prev);
+              }}
+            >
+              {/* <FontAwesome5 name="eye" size={24} color="black" /> */}
+
+              {isSecureEntry ? (
+                <FontAwesome5 name="eye-slash" size={24} color="black" />
+              ) : (
+                <FontAwesome5 name="eye" size={24} color="black" />
+              )}
+              </TouchableOpacity>
+          }
           iconPostion="right"
           // style={styles.input}
         />
@@ -110,7 +134,13 @@ const LoginComp = ({ onchangeText,isChecked, setChecked, form }: LoginType) => {
           </View>
         </View>
 
-        <CustomButton primary title="Login" loading={false} disabled={false} />
+        <CustomButton
+          primary
+          title="Login"
+          loading={isLoading}
+          disabled={isLoading}
+          onPress={onSubmit}
+        />
       </View>
     </View>
   );

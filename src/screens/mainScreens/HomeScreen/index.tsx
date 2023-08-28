@@ -1,8 +1,14 @@
-import { View, Text, ScrollView } from 'react-native'
-import React from 'react'
-import HomeScreenComp from '../../../components/mainComponents/HomeScreenComp'
+import { View, Text, ScrollView } from "react-native";
+import React from "react";
+import HomeScreenComp from "../../../components/mainComponents/HomeScreenComp";
+import { useQuery } from "react-query";
+import { getMeUser } from "../../../helper/api";
 
 const HomeScreen = () => {
+  //CALL USEQUERY
+  const { isLoading, error, data } = useQuery(["getme"], getMeUser);
+
+  console.log(data, "data");
 
   const homeSwiper = [
     {
@@ -71,9 +77,12 @@ const HomeScreen = () => {
         homeSwiper={homeSwiper}
         trendingCourseData={trendingCourseData}
         ratedCourseData={ratedCourseData}
+        isLoading={isLoading}
+        error={error}
+        data={data}
       />
     </ScrollView>
   );
-}
+};
 
-export default HomeScreen
+export default HomeScreen;
