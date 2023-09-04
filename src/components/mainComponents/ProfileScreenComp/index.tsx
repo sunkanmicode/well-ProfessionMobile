@@ -53,7 +53,7 @@ const ProfileScreenComp = ({
         )}
         {!isLoading && !isError && (
           <Text className="font-[PlusSemiBold] mt-2 text-[18px] leading-6">
-            {data?.others.name}
+            {data?.others?.name}
           </Text>
         )}
         <TouchableOpacity

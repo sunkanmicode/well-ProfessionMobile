@@ -24,8 +24,11 @@ const HomeScreenComp = ({
   isLoading,
   error,
   data,
+  getCourses,
 }) => {
   const navigation = useNavigation();
+
+  
 
   return (
     <>
@@ -39,12 +42,11 @@ const HomeScreenComp = ({
           {error && (
             <Text className="text-lg text-white font-[PlusSemiBold]">
               {/* {error} */}
-
             </Text>
           )}
           {!isLoading && !error && (
             <Text className="text-lg text-white font-[PlusSemiBold]">
-              Hello {data?.others.name}
+              Hello {data?.others?.name}
             </Text>
           )}
 
@@ -75,7 +77,11 @@ const HomeScreenComp = ({
           data={homeSwiper}
           renderItem={({ item }) => (
             <View>
-              <ImageBackground source={item.img} key={item.title} style={{ width, height: 250 }}>
+              <ImageBackground
+                source={item.img}
+                key={item.title}
+                style={{ width, height: 250 }}
+              >
                 <View className="h-18 w-64 my-20 mx-5">
                   <Text className="text-sm  text-white font-[PlusBold] leading-6">
                     {item.title}
@@ -87,6 +93,51 @@ const HomeScreenComp = ({
         />
       </View>
       <View className="py-10 px-6">
+        {/* ALl Courses */}
+        <View className="flex-row items-center justify-between">
+          <Text className=" text-lg font-[PlusBold]">All Courses</Text>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("AllCoursesScreen");
+            }}
+          >
+            <Text className="text-xs text-[#AF5E41] font-[PlusSemiBold]">
+              View all
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View className="py-10">
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {getCourses?.data?.getCourse?.map((item) => (
+              <View className=" flex-row">
+                <TouchableOpacity
+                  key={item.id}
+                  className="w-24 mr-5"
+                  onPress={() => {
+                    console.log("click", item.id);
+                    navigation.navigate("CoursePreviewScreen", { item });
+                  }}
+                >
+                  <View className="bg-red-700 w-24 h-32 rounded-xl">
+                    <Image
+                      source={{ uri: item.image }}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: 10,
+                      }}
+                    />
+                  </View>
+                  <Text className="text-[10px] text-center font-[Plusregular] mt-2">
+                    {item.title}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
+
+        {/* all courses */}
         <View className="flex-row items-center justify-between">
           <Text className=" text-lg font-[PlusBold]">Now Trending Courses</Text>
           <TouchableOpacity
@@ -101,15 +152,19 @@ const HomeScreenComp = ({
         </View>
         <View className="py-10">
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {trendingCourseData.map((item) => (
+            {getCourses?.data?.getCourse?.map((item) => (
               <View className=" flex-row">
-                <TouchableOpacity key={item.id} className="w-24 mr-5" onPress={()=>{
-                  console.log("click", item.id)
-                  navigation.navigate("CoursePreviewScreen", {item})
-                }}>
+                <TouchableOpacity
+                  key={item.id}
+                  className="w-24 mr-5"
+                  onPress={() => {
+                    console.log("click", item.id);
+                    navigation.navigate("CoursePreviewScreen", { item });
+                  }}
+                >
                   <View className="bg-red-700 w-24 h-32 rounded-xl">
                     <Image
-                      source={item.img}
+                      source={{ uri: item.image }}
                       style={{
                         width: "100%",
                         height: "100%",

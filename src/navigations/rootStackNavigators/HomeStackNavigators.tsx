@@ -5,6 +5,9 @@ import TopRatedScreen from "../../screens/mainScreens/TopRatedScreen";
 import TrendingScreen from "../../screens/mainScreens/TrendingScreen";
 import ViewProfileScreen from "../../screens/mainScreens/ViewProfileScreen";
 import CoursePreviewScreen from "../../screens/mainScreens/CoursePreviewScreen";
+import CourseReviewScreen from "../../screens/mainScreens/CourseReviewScreen";
+import AllCoursesScreen from "../../screens/mainScreens/AllCoursesScreen";
+import CartScreen from "../../screens/mainScreens/CartScreen";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -28,6 +31,11 @@ const HomeStackNavigators = () => {
           options={{ headerShown: false }}
         />
         <HomeStack.Screen
+          name="AllCoursesScreen"
+          component={AllCoursesScreen}
+          options={{ headerShown: false }}
+        />
+        <HomeStack.Screen
           name="ViewProfileScreen"
           component={ViewProfileScreen}
           options={{ headerShown: false }}
@@ -35,6 +43,16 @@ const HomeStackNavigators = () => {
         <HomeStack.Screen
           name="CoursePreviewScreen"
           component={CoursePreviewScreen}
+          options={{ headerShown: false }}
+        />
+        <HomeStack.Screen
+          name="CourseReviewScreen"
+          component={CourseReviewScreen}
+          options={{ headerShown: false }}
+        />
+        <HomeStack.Screen
+          name="CartScreen"
+          component={CartScreen}
           options={{ headerShown: false }}
         />
       </HomeStack.Group>

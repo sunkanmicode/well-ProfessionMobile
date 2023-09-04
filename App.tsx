@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Toast from "react-native-toast-message";
 import AppNavigation from './src/navigations';
+import { StripeProvider } from "@stripe/stripe-react-native";
 import { useFonts } from "expo-font";
 import { QueryClient, QueryClientProvider } from "react-query";
 

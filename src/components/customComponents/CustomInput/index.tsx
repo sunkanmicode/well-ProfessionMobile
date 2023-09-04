@@ -12,7 +12,8 @@ type InputType = {
   placeholder?: string;
   error?: string;
   secureTextEntry?: boolean;
-  keyboardType?: string
+  keyboardType?: string;
+  multiline?:boolean;
 };
 
 const CustomInput = ({
@@ -26,6 +27,7 @@ const CustomInput = ({
   placeholder,
   error,
   keyboardType,
+  multiline,
 }: InputType) => {
   const [focused, setFocused] = React.useState<boolean>(false);
 
@@ -69,6 +71,7 @@ const CustomInput = ({
           value={value}
           onChangeText={onChangeText}
           placeholder={placeholder}
+          multiline={multiline}
           keyboardType={keyboardType}
           className="flex-1 h-11 px-2 font-[Plusregular]"
           // style={style}

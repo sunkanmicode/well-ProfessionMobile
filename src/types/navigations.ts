@@ -6,15 +6,17 @@ export type AuthStackParamList = {
   ResetPassword: undefined;
 };
 
-export type HomeStackParamList ={
+export type HomeStackParamList = {
   HomeScreen: undefined;
   TopRatedScreen: undefined;
-  TrendingScreen:undefined;
-  ProfileScreen:undefined;
+  TrendingScreen: undefined;
+  ProfileScreen: undefined;
   ViewProfileScreen: undefined;
-  CoursePreviewScreen: {item: object};
-
-}
+  CoursePreviewScreen: { item: object };
+  CourseReviewScreen: undefined;
+  AllCoursesScreen: undefined;
+  CartScreen: {item: object};
+};
 
 export interface RootStackParamList extends HomeStackParamList, AuthStackParamList {}
 

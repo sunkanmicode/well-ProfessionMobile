@@ -37,3 +37,9 @@ export const getUsers = async () => {
   const res = await axiosInstance.get("/user/all-users");
   return res.data;
 };
+
+//COURSE API
+export const getAllCourses = async () => {
+  const res = await axiosInstance.get("/course");
+  return res.data;
+};

@@ -6,6 +6,7 @@ import { CartIcon, FeaturedIcon, HomeIcon, ProfileIcon, SearchIcon } from '../he
 import HomeStackNavigators from './rootStackNavigators/HomeStackNavigators';
 import { HomeStackParamList } from '../types/navigations';
 import ProfileStackNavigators from './rootStackNavigators/ProfileStackNavigators';
+import CartScreen from '../screens/mainScreens/CartScreen';
 
 
 const HomeStack = ()=>{}
@@ -88,7 +89,7 @@ const HomeNavigator = () => {
         />
         <Tab.Screen
           name="Cart"
-          component={DummyScreen}
+          component={CartScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
               <CartIcon size={size} color={color} />
