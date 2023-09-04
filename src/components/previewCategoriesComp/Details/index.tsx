@@ -4,7 +4,7 @@ import { ProfileIcon } from "../../../helper/Icon";
 import { Ionicons } from "@expo/vector-icons";
 
 
-const Details = ({ name }) => {
+const Details = ({ item }) => {
 
   const data = [
     {
@@ -52,9 +52,7 @@ const Details = ({ name }) => {
         <Text className="font-[PlusBold] text-[18px] mb-4">About Course</Text>
         <View>
           <Text className="font-[Plusregular] text-[14px]">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt Morbi blandit cursus risus at ultrices mi
-            tempus. Ac turpis egestas sed tempus urna et pharetra pharetra massa
+            {item?.description}
           </Text>
           <TouchableOpacity>
             <Text className="text-[#AF5E41] text-[14px] font-[PlusSemiBold]">

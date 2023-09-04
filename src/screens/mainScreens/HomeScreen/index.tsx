@@ -2,11 +2,14 @@ import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import HomeScreenComp from "../../../components/mainComponents/HomeScreenComp";
 import { useQuery } from "react-query";
-import { getMeUser } from "../../../helper/api";
+import { getAllCourses, getMeUser } from "../../../helper/api";
 
 const HomeScreen = () => {
   //CALL USEQUERY
   const { isLoading, error, data } = useQuery(["getme"], getMeUser);
+  const getCourses = useQuery(["course"], getAllCourses);
+ 
+  
 
   console.log(data, "data");
 
@@ -80,6 +83,7 @@ const HomeScreen = () => {
         isLoading={isLoading}
         error={error}
         data={data}
+        getCourses={getCourses}
       />
     </ScrollView>
   );

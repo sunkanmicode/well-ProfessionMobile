@@ -2,7 +2,8 @@ import { View, Text, TouchableOpacity, Button, ScrollView } from "react-native";
 import React from "react";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import {Video, ResizeMode}  from "expo-av";
+import { Video, ResizeMode } from "expo-av";
+import StarRating, { StarRatingDisplay } from "react-native-star-rating-widget";
 import Details from "../../previewCategoriesComp/Details";
 import Lessions from "../../previewCategoriesComp/Lessions";
 import Reviews from "../../previewCategoriesComp/Reviews";
@@ -11,15 +12,25 @@ const CoursePrevieComp = ({
   courseCategories,
   categoriesIndex,
   setCategoriesIndex,
+  item,
+  getAllUsers,
+  rating,
+  setRating,
 }) => {
   const navigation = useNavigation();
   const video = React.useRef(null);
   const [status, setStatus] = React.useState({});
+  const [videUrl, setVideUrl] = React.useState(null);
+
+  const selectLesson = (id) => {
+    setVideUrl(id);
+  };
+  const vider_show = item.lessons.find((d) => d._id);
 
   const selectedText = "bg-[#A2A7A9] text-[#252C32] font-[PlusSemiBold]";
   return (
     <>
-      <View className="py-10 px-6 my-5">
+      <View className=" py-10 px-6 my-5 ">
         <View className="flex-row justify-between items-center">
           <TouchableOpacity
             className="w-25 h-6 border border-gray-300"
@@ -46,7 +57,9 @@ const CoursePrevieComp = ({
                 borderRadius: 5,
               }}
               source={{
-                uri: "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
+                uri:
+                  vider_show?.video ||
+                  "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
               }}
               useNativeControls={true}
               isLooping={true}
@@ -64,26 +77,33 @@ const CoursePrevieComp = ({
           </View>
 
           <View className="my-2">
-            <Text className="font-[PlusBold] text-[20px]">
-              Lorem ipsum dolor sit.
-            </Text>
+            <Text className="font-[PlusBold] text-[20px]">{item.title}</Text>
             <View className="flex-row items-center mt-1">
-              <Text className="font-[PlusSemiBold] text-[9px] mr-2 text-[#CD760F]">
-                Rating Stars
-              </Text>
-              <Text className="font-[InterRegular] text-[12px] text-[#5B6871]">
-                43 Ratings
+              <StarRatingDisplay
+                starSize={15}
+                rating={rating}
+                color="#F8C51B"
+                // onChange={setRating}
+                starStyle={{ width: 5 }}
+              />
+
+              <Text className="font-[InterRegular] mx-5 text-[12px] text-[#5B6871]">
+                {item.ratings.length} Ratings
               </Text>
             </View>
             <View className="flex-row items-center mt-1">
               <Text className="font-[PlusMedium] text-[12px] mr-2 text-[#CD760F] mr-2s">
-                By Lorem ipsum
+                {
+                  getAllUsers?.data?.usersData?.find(
+                    (d) => d._id === item.instructor
+                  )?.name
+                }
               </Text>
               <Ionicons name="checkmark-circle" size={11} color="black" />
             </View>
             <View className="flex-row items-center ">
               <Text className="font-[InterBold] text-[15px] text-[#AF5E41]">
-                N260.00
+                N{item.price}
               </Text>
               <Text className="mx-3 line-through decoration-double font-[InterRegular] text-[13] text-[#545454]">
                 N450.00
@@ -94,7 +114,7 @@ const CoursePrevieComp = ({
                 1234 members
               </Text>
               <Text className="text-[#A2A7A9] font-[PlusLight] text-[10px] leading-[15px] mx-2">
-                12 lessions
+                {item.lessons.length} lessons
               </Text>
               <Text className="text-[#A2A7A9] font-[PlusLight] text-[10px] leading-[15px]">
                 {" "}
@@ -121,19 +141,25 @@ const CoursePrevieComp = ({
               ))}
             </View>
             <View>
-              {categoriesIndex === 0 && <Details name="hooooooooo" />}
-              {categoriesIndex === 1 && <Lessions />}
-              {categoriesIndex === 2 && <Reviews />}
+              {categoriesIndex === 0 && <Details item={item} />}
+              {categoriesIndex === 1 && (
+                <Lessions item={item} selectLesson={selectLesson} />
+              )}
+              {categoriesIndex === 2 && (
+                <Reviews item={item} getAllUsers={getAllUsers} />
+              )}
             </View>
           </View>
         </View>
       </View>
       <View className="h-[0.5] bg-black" />
       <View className="flex-row flex-1 h-[80] bg-white py-2 justify-center ">
-        <TouchableOpacity className="w-[64] h-[44] border items-center justify-center mx-3 rounded">
+        <TouchableOpacity className="w-[64] h-[44] border items-center justify-center mx-3 rounded" onPress={()=>{
+          navigation.navigate("CartScreen", {item})
+        }}>
           <Text>Icon</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="w-[287] h-[44] bg-[#1E1D2F] justify-center items-center rounded">
+        <TouchableOpacity className="w-[287] h-[44] bg-[#1E1D2F] justify-center items-center rounded" >
           <Text className="font-[PlusSemiBold] text-white">Enroll Now</Text>
         </TouchableOpacity>
       </View>

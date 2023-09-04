@@ -53,7 +53,7 @@ const ProfileScreen = () => {
         onPress: async () => {
             Toast.show({
               type: "success",
-              text1: authUser.others.name,
+              text1: authUser?.others?.name,
               text2: "You've logging out"
             });
           await AsyncStorage.removeItem("token");
