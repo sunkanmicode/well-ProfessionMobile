@@ -3,12 +3,12 @@ import { persist } from "zustand/middleware";
 
 // import { IUser } from '../api/types';
 
-// type Store = {
-//   // authUser: IUser | null;
-//   requestLoading: boolean;
-//   setAuthUser: (user: IUser | null) => void;
-//   setRequestLoading: (isLoading: boolean) => void;
-// };
+type Store = {
+  // authUser: IUser | null;
+  requestLoading: boolean;
+  setAuthUser: (user: IUser | null) => void;
+  setRequestIsLogged: (isLoggedIn: boolean) => void;
+};
 
 const useAuthStore = create(
  
